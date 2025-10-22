@@ -10,14 +10,13 @@ const Index = () => {
 
   useEffect(() => {
     // Load images from public/rejections folder
-    // For now, this will be populated manually by adding images to public/rejections/
     const loadImages = async () => {
-      // This is a placeholder - in production you would fetch the list of images
-      // For now, we'll create a demo with placeholder count
-      const imageList: string[] = [];
+      // List of rejection screenshots - add your filenames here
+      const imageList: string[] = [
+        '/rejections/Screenshot_20251022-120724.Gmail.png',
+        // Add more rejection screenshots here as you collect them
+      ];
       
-      // Check for images in public/rejections folder
-      // Users will add their screenshots there
       setImages(imageList);
       setProgress((imageList.length / maxRejections) * 100);
     };
