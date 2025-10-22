@@ -33,7 +33,7 @@ const Index = () => {
             <FileX className="w-12 h-12 text-primary" strokeWidth={1.5} />
           </div>
           <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-primary-glow to-accent bg-clip-text text-transparent leading-tight">
-            My Rejection Journey
+            My Rejection Journey - Vb de domu Ra
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Every rejection is a step forward. Tracking my path to success.
