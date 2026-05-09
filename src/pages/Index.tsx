@@ -8,23 +8,58 @@ const Index = () => {
   const [progress, setProgress] = useState(0);
   const maxRejections = 100;
 
+  function Redirect (IMG){
+    window.open(IMG, "_blank");
+  }
+
   useEffect(() => {
-    // Load images from public/rejections folder
     const loadImages = async () => {
-      // List of rejection screenshots - add your filenames here
       const base = import.meta.env.BASE_URL;
-      const imageList: string[] = [
-        `${base}rejections/Screenshot_20251022-120724.Gmail.png`,
-        // Add more rejection screenshots here as you collect them
+
+      const rawImageList: string[] = [
+        "rejections/Screenshot_20251022-120724.Gmail.png",
+
+        // EXEMPLU GOOGLE DRIVE
+        // trebuie sa fie public: Anyone with the link
+        "https://drive.google.com/file/d/1zqqaS3G8W-RfdISK4O4UwNkNKc9tRJ3J/view",
       ];
-      
-      setImages(imageList);
-      setProgress((imageList.length / maxRejections) * 100);
+
+const finalImages = rawImageList.map((img) => {
+
+  // GOOGLE DRIVE
+  if (img.includes("drive.google.com")) {
+    let fileId = "";
+
+    if (img.includes("/d/")) {
+      fileId = img.split("/d/")[1].split("/")[0];
+    } else if (img.includes("id=")) {
+      fileId = img.split("id=")[1].split("&")[0];
+    }
+
+    // URL CARE FUNCTIONEAZA IN IMG TAG
+    return `https://drive.google.com/thumbnail?id=${fileId}&sz=w2000`;
+  }
+
+  // LINK NORMAL
+  if (img.startsWith("http")) {
+    return img;
+  }
+
+  // LOCAL
+  const cleanBase = base.endsWith("/") ? base : `${base}/`;
+  const cleanImg = img.startsWith("/")
+    ? img.substring(1)
+    : img;
+
+  return `${cleanBase}${cleanImg}`;
+});
+
+      setImages(finalImages);
+      setProgress((finalImages.length / maxRejections) * 100);
     };
 
     loadImages();
   }, []);
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-accent/5">
       <div className="container mx-auto px-4 py-16 max-w-6xl">
@@ -34,7 +69,7 @@ const Index = () => {
             <FileX className="w-12 h-12 text-primary" strokeWidth={1.5} />
           </div>
           <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-primary-glow to-accent bg-clip-text text-transparent leading-tight">
-            My Rejection Journey - Vb de domu Ra
+            My Rejection Journey 
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Every rejection is a step forward. Tracking my path to success.
@@ -84,6 +119,7 @@ const Index = () => {
                 <Card 
                   key={index}
                   className="overflow-hidden group cursor-pointer transition-all duration-300 hover:shadow-[var(--shadow-soft)] hover:-translate-y-1 border-border/50 bg-card"
+                  onClick={ () => Redirect(image) }
                 >
                   <div className="aspect-[4/3] relative overflow-hidden bg-secondary">
                     <img
