@@ -12,8 +12,9 @@ const Index = () => {
     // Load images from public/rejections folder
     const loadImages = async () => {
       // List of rejection screenshots - add your filenames here
+      const base = import.meta.env.BASE_URL;
       const imageList: string[] = [
-        '/rejections/Screenshot_20251022-120724.Gmail.png',
+        `${base}rejections/Screenshot_20251022-120724.Gmail.png`,
         // Add more rejection screenshots here as you collect them
       ];
       
