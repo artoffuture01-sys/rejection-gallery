@@ -22,6 +22,7 @@ const Index = () => {
         // EXEMPLU GOOGLE DRIVE
         // trebuie sa fie public: Anyone with the link
         "https://drive.google.com/file/d/1zqqaS3G8W-RfdISK4O4UwNkNKc9tRJ3J/view",
+        "https://drive.google.com/file/d/1qlcZap6_dNBoCJAtfCTP2W2-v7kKJHca/view"
       ];
 
 const finalImages = rawImageList.map((img) => {
